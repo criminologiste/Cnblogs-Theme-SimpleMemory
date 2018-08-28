@@ -1,0 +1,187 @@
+<!-- menu html -->
+<div class="container">
+    <div class="menu-wrap optiscroll" id="menuWrap" style="display:none">
+        <nav class="menu">
+
+            <!-- 个人简介 -->
+            <div class="introduce-box">
+                <div class="introduce-head">
+                    <div class="introduce-via">
+                        <img src="https://pic.cnblogs.com/avatar/1065454/20161119225202.png">
+                    </div>
+                </div>
+                <div id="introduce"></div>
+            </div>
+
+            <!-- 导航 -->
+            <div class="nav-title"></div>
+            <div class="icon-list">
+                <ul>
+                    <li><a href="https://www.cnblogs.com/bndong/" target="_self">首页</a></li>
+                    <li><a href="https://msg.cnblogs.com/send/BNDong" target="_blank">联系</a></li>
+                    <li><a href="https://www.cnblogs.com/bndong/rss" target="_blank">订阅</a></li>
+                    <li><a href="https://i.cnblogs.com/" target="_blank">管理</a></li>
+                    <li><a href="https://github.com/BNDong" target="_blank">GitHub</a></li>
+                    <li><a href="https://www.cnblogs.com/" target="_blank">CNBlogs</a></li>
+                </ul>
+            </div>
+
+            <!-- 随笔分类 -->
+            <div class="classify-title"></div>
+            <div class="m-icon-list" id="sb-classify"></div>
+
+            <!-- 随笔档案 -->
+            <div class="record-title"></div>
+            <div class="m-icon-list" id="sb-record"></div>
+
+            <!-- 阅读排行 -->
+            <div class="topview-title"></div>
+            <div class="m-icon-list" id="sb-topview"></div>
+
+            <!-- 推荐排行 -->
+            <div class="topDiggPosts-title"></div>
+            <div class="m-icon-list" id="sb-topDiggPosts"></div>
+
+        </nav>
+        <button class="close-button" id="close-button">Close Menu</button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button" id="open-button">MENU</button>
+    <div class="content-wrap" id="content-wrap"></div><!-- /content-wrap -->
+</div>
+<!-- menu html end -->
+
+<!-- banner html -->
+<div class="main-header">
+    <div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title cssf79d1841e1b313">BNDong</h1>
+            <h2 class="page-description" id="hitokoto"></h2>
+            <h3 class="page-author" id="hitokotoAuthor"></h3>
+        </div>
+    </div>
+    <a class="scroll-down" href="javascript:void(0);" data-offset="-45">
+        <span class="hidden">Scroll Down</span>
+        <i class="scroll-down-icon iconfont icon-fanhui"></i>
+    </a>
+    <canvas id="myTopCanvas" style=" position: absolute;margin: auto;width: 100%;height: 100%;top: 0;bottom: 0;left: 0;right: 0;"></canvas>
+</div>
+<!-- banner html end -->
+
+<!-- global var -->
+<script type="text/javascript">
+
+    // start cache
+    $.ajaxSetup({cache: true});
+
+    /**
+     * source:"github" versions 处为GitHub提交版本哈希值 根据版本加载代码 https://github.com/BNDong/Cnblogs-Theme-SimpleMemory/commits/master
+     * source:"cnblogs" 从博客园文件加载代码，可以不配置版本号，本人博客园文件不会更新了（操作实在太麻烦了），如有需求可以从github上挡下来最新代码，保存到自己的博客园文件中进行加载
+     */
+    var staticFileSetting = {
+        source   : 'github',
+        versions : 'f5c1a9b7362d95f6ad2864f8c197f6392de57cd5', // 版本号
+    };
+
+    // load loadingJs
+    $.getScript(getJsDelivrUrl('loading.js'), function () {
+
+        // Loading start
+        demo.initRebound();
+        demo.initSpinner();
+        demo.spinner.init(demo.spring, true);
+
+        $.getScript(getJsDelivrUrl('require.min.js'), function () {
+
+            $.getScript(getJsDelivrUrl('config.js'), function () {
+
+                var staticResource = [
+                    'optiscroll',
+                    'ToProgress',
+                    'rotate',
+                    'snapSvg',
+                    'classie',
+                    'main4',
+                    'tools',
+                ];
+                require(staticResource, function() {
+
+                    require(['base'], function() {
+
+                        var base = new Base;
+                        base.init();
+                    });
+                });
+
+            });
+
+        });
+    });
+
+    /**
+     * 文件地址
+     * @param file
+     * @param directory 文件目录名称
+     * @returns {string}
+     */
+    function getJsDelivrUrl(file, directory) {
+        file = setFileNameMin(file, directory);
+
+        switch (staticFileSetting.source) {
+
+            case 'github': // 注意：此处为GitHub加载源，如果需要加载自己分支的代码，修改此处URL，URL规则详见：https://www.jsdelivr.com/
+                return 'https://cdn.jsdelivr.net/gh/BNDong/Cnblogs-Theme-SimpleMemory@'+staticFileSetting.versions+'/' + (file ? file : '');
+                break;
+
+            case 'cnblogs': // 注意：此处为博客园加载源，加载本人博客文件为老版本。本人博客园文件停止更新，如果需要可以修改至自己博客园文件
+                return 'https://blog-static.cnblogs.com/files/bndong/'+file;
+                break;
+
+            default:
+                return '';break;
+        }
+    }
+
+    /**
+     * 文件名
+     * @param file
+     * @param directory 文件目录名称
+     * @returns {*}
+     */
+    function setFileNameMin(file, directory) {
+        if (typeof file == 'undefined') return '';
+
+        var suffix  = null;
+        var fileArr = file.split('.');
+
+        if (fileArr.length > 0 && $.inArray(fileArr[(fileArr.length -1)], ['js', 'css']) != -1) {
+            suffix    = fileArr.pop();
+            directory = suffix;
+        }
+
+        switch (staticFileSetting.source) {
+
+            case 'github':
+
+                if (typeof file !== 'undefined' && file.search('.min') == -1) fileArr.push('min');
+
+                if (suffix != null) fileArr.push(suffix);
+
+                return (typeof directory !== 'undefined' ? (directory + '/' + fileArr.join('.')) : (fileArr.join('.')));
+                break;
+
+            case 'cnblogs':
+                if (suffix != null) fileArr.push(suffix);
+                return fileArr.join('.');
+                break;
+
+            default:
+                return file;break;
+        }
+    }
+</script>
+<!-- global var end -->
