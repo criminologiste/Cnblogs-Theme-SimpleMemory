@@ -32,50 +32,50 @@ function Base() {
      */
     this.loadingBeforeInit = function () {
         // 背景彩带
-        if (document.getElementById('evanyou')) {
-            var c = document.getElementById('evanyou'),
-                x = c.getContext('2d'),
-                pr = window.devicePixelRatio || 1,
-                w = window.innerWidth,
-                h = window.innerHeight,
-                f = 90,
-                q,
-                m = Math,
-                r = 0,
-                u = m.PI * 2,
-                v = m.cos,
-                z = m.random;
-            c.width = w * pr;
-            c.height = h * pr;
-            x.scale(pr, pr);
-            x.globalAlpha = 0.6;
-            function evanyou () {
-                x.clearRect(0, 0, w, h);
-                q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
-                while (q[1].x < w + f) d(q[0], q[1])
-            }
-            function d (i, j) {
-                x.beginPath();
-                x.moveTo(i.x, i.y);
-                x.lineTo(j.x, j.y);
-                var k = j.x + (z() * 2 - 0.25) * f,
-                    n = y(j.y);
-                x.lineTo(k, n);
-                x.closePath();
-                r -= u / -50;
-                x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
-                x.fill();
-                q[0] = q[1];
-                q[1] = { x: k, y: n }
-            }
-            function y (p) {
-                var t = p + (z() * 2 - 1.1) * f;
-                return (t > h || t < 0) ? y(p) : t;
-            }
-            document.onclick = evanyou;
-            document.ontouchstart = evanyou;
-            evanyou();
-        }
+        // if (document.getElementById('evanyou')) {
+        //     var c = document.getElementById('evanyou'),
+        //         x = c.getContext('2d'),
+        //         pr = window.devicePixelRatio || 1,
+        //         w = window.innerWidth,
+        //         h = window.innerHeight,
+        //         f = 90,
+        //         q,
+        //         m = Math,
+        //         r = 0,
+        //         u = m.PI * 2,
+        //         v = m.cos,
+        //         z = m.random;
+        //     c.width = w * pr;
+        //     c.height = h * pr;
+        //     x.scale(pr, pr);
+        //     x.globalAlpha = 0.6;
+        //     function evanyou () {
+        //         x.clearRect(0, 0, w, h);
+        //         q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
+        //         while (q[1].x < w + f) d(q[0], q[1])
+        //     }
+        //     function d (i, j) {
+        //         x.beginPath();
+        //         x.moveTo(i.x, i.y);
+        //         x.lineTo(j.x, j.y);
+        //         var k = j.x + (z() * 2 - 0.25) * f,
+        //             n = y(j.y);
+        //         x.lineTo(k, n);
+        //         x.closePath();
+        //         r -= u / -50;
+        //         x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+        //         x.fill();
+        //         q[0] = q[1];
+        //         q[1] = { x: k, y: n }
+        //     }
+        //     function y (p) {
+        //         var t = p + (z() * 2 - 1.1) * f;
+        //         return (t > h || t < 0) ? y(p) : t;
+        //     }
+        //     document.onclick = evanyou;
+        //     document.ontouchstart = evanyou;
+        //     evanyou();
+        // }
     };
 
     /**
@@ -528,9 +528,9 @@ function Base() {
     this.addWebPv = function() {
         var pvHtml =  '<i class="iconfont icon-odps-data cnzz" style="position: relative;top: 2px;left: 3px;cursor: pointer;"></i>';
         // 请去 AmazingCounters.com 配置自己的，谢谢！！
-        pvHtml += '<img border="0" src="https://cc.amazingcounters.com/counter.php?i=3217893&amp;c=9653992" s="AmazingCounters.com" style="opacity: 0.5; margin-left: 7px;cursor: pointer;">';
+        pvHtml += '<img border="0" src="http://cc.amazingcounters.com/counter.php?i=3226342&c=9679339" s="AmazingCounters.com" style="opacity: 0.5; margin-left: 7px;cursor: pointer;">';
         pvHtml += '<div>【世界上只有一种真正的英雄主义 🌈 就是认清了生活的真相后还依然热爱它。❤️】</div>';
-        pvHtml += "<div>PHP \\ Java \\ Python \\ Linux \\ JavaScript<span class='my-face'>ღゝ◡╹)ノ♡</span></div>";
+        pvHtml += "<div><span class='my-face'>ღゝ◡╹)ノ♡</span></div>";
         pvHtml += '<div id="cnzzInfo"></div>';
         $('#footer').append(pvHtml);
         $('#footer').prepend('<div class="footer-image"></div>');
@@ -541,7 +541,7 @@ function Base() {
     this.setCnzz = function() {
         // 请去 CNZZ 配置自己的，谢谢！！
         var url = window.location.href;
-        var cnzzStat = $('#cnzz_stat_icon_1274152299 a');
+        var cnzzStat = $('#cnzz_stat_icon_1274589189 a');
         if (cnzzStat.length > 0) {
             var cnzzInfo = [];
             var cnzzArr  = $(cnzzStat[1]).text().split('|');
