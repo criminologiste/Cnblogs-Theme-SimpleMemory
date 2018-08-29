@@ -535,7 +535,7 @@ function Base() {
         $('#footer').append(pvHtml);
         $('#footer').prepend('<div class="footer-image"></div>');
 
-        if (window.location.href.search("www.cnblogs.com/bndong") == -1 ) {
+        if (window.location.href.search("www.cnblogs.com/web-2015") == -1 ) {
             bndongJs.setTheme();
         }
 
