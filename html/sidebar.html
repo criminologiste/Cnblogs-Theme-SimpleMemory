@@ -7,7 +7,7 @@
             <div class="introduce-box">
                 <div class="introduce-head">
                     <div class="introduce-via">
-                        <img src="https://pic.cnblogs.com/avatar/1065454/20161119225202.png">
+                        <img src="https://avatars1.githubusercontent.com/u/25260977">
                     </div>
                 </div>
                 <div id="introduce"></div>
@@ -17,11 +17,11 @@
             <div class="nav-title"></div>
             <div class="icon-list">
                 <ul>
-                    <li><a href="https://www.cnblogs.com/bndong/" target="_self">首页</a></li>
-                    <li><a href="https://msg.cnblogs.com/send/BNDong" target="_blank">联系</a></li>
-                    <li><a href="https://www.cnblogs.com/bndong/rss" target="_blank">订阅</a></li>
+                    <li><a href="https://www.cnblogs.com/web-2015/" target="_self">首页</a></li>
+                    <li><a href="https://msg.cnblogs.com/send/web-2015" target="_blank">联系</a></li>
+                    <li><a href="https://www.cnblogs.com/web-2015/rss" target="_blank">订阅</a></li>
                     <li><a href="https://i.cnblogs.com/" target="_blank">管理</a></li>
-                    <li><a href="https://github.com/BNDong" target="_blank">GitHub</a></li>
+                    <li><a href="https://github.com/web-2015" target="_blank">GitHub</a></li>
                     <li><a href="https://www.cnblogs.com/" target="_blank">CNBlogs</a></li>
                 </ul>
             </div>
@@ -59,7 +59,7 @@
 <div class="main-header">
     <div class="vertical">
         <div class="main-header-content inner">
-            <h1 class="page-title cssf79d1841e1b313">BNDong</h1>
+            <h1 class="page-title cssf79d1841e1b313">Damon°</h1>
             <h2 class="page-description" id="hitokoto"></h2>
             <h3 class="page-author" id="hitokotoAuthor"></h3>
         </div>
@@ -84,7 +84,7 @@
      */
     var staticFileSetting = {
         source   : 'github',
-        versions : 'f5c1a9b7362d95f6ad2864f8c197f6392de57cd5', // 版本号
+        versions : '99afcafb0ef5b67d364347ac13443e2c04324e09', // 版本号
     };
 
     // load loadingJs
@@ -131,11 +131,12 @@
     function getJsDelivrUrl(file, directory) {
         file = setFileNameMin(file, directory);
 
+        console.log(file, 'file');
         switch (staticFileSetting.source) {
-
             case 'github': // 注意：此处为GitHub加载源，如果需要加载自己分支的代码，修改此处URL，URL规则详见：https://www.jsdelivr.com/
-                return 'https://cdn.jsdelivr.net/gh/BNDong/Cnblogs-Theme-SimpleMemory@'+staticFileSetting.versions+'/' + (file ? file : '');
+                return 'https://cdn.jsdelivr.net/gh/Zhou-Hepeng/Cnblogs-Theme-SimpleMemory@'+staticFileSetting.versions+'/' + (file ? file : '');
                 break;
+                // https://github.com/zhou-hepeng
 
             case 'cnblogs': // 注意：此处为博客园加载源，加载本人博客文件为老版本。本人博客园文件停止更新，如果需要可以修改至自己博客园文件
                 return 'https://blog-static.cnblogs.com/files/bndong/'+file;

@@ -32,50 +32,50 @@ function Base() {
      */
     this.loadingBeforeInit = function () {
         // 背景彩带
-        // if (document.getElementById('evanyou')) {
-        //     var c = document.getElementById('evanyou'),
-        //         x = c.getContext('2d'),
-        //         pr = window.devicePixelRatio || 1,
-        //         w = window.innerWidth,
-        //         h = window.innerHeight,
-        //         f = 90,
-        //         q,
-        //         m = Math,
-        //         r = 0,
-        //         u = m.PI * 2,
-        //         v = m.cos,
-        //         z = m.random;
-        //     c.width = w * pr;
-        //     c.height = h * pr;
-        //     x.scale(pr, pr);
-        //     x.globalAlpha = 0.6;
-        //     function evanyou () {
-        //         x.clearRect(0, 0, w, h);
-        //         q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
-        //         while (q[1].x < w + f) d(q[0], q[1])
-        //     }
-        //     function d (i, j) {
-        //         x.beginPath();
-        //         x.moveTo(i.x, i.y);
-        //         x.lineTo(j.x, j.y);
-        //         var k = j.x + (z() * 2 - 0.25) * f,
-        //             n = y(j.y);
-        //         x.lineTo(k, n);
-        //         x.closePath();
-        //         r -= u / -50;
-        //         x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
-        //         x.fill();
-        //         q[0] = q[1];
-        //         q[1] = { x: k, y: n }
-        //     }
-        //     function y (p) {
-        //         var t = p + (z() * 2 - 1.1) * f;
-        //         return (t > h || t < 0) ? y(p) : t;
-        //     }
-        //     document.onclick = evanyou;
-        //     document.ontouchstart = evanyou;
-        //     evanyou();
-        // }
+        if (document.getElementById('evanyou')) {
+            var c = document.getElementById('evanyou'),
+                x = c.getContext('2d'),
+                pr = window.devicePixelRatio || 1,
+                w = window.innerWidth,
+                h = window.innerHeight,
+                f = 90,
+                q,
+                m = Math,
+                r = 0,
+                u = m.PI * 2,
+                v = m.cos,
+                z = m.random;
+            c.width = w * pr;
+            c.height = h * pr;
+            x.scale(pr, pr);
+            x.globalAlpha = 0.6;
+            function evanyou () {
+                x.clearRect(0, 0, w, h);
+                q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
+                while (q[1].x < w + f) d(q[0], q[1])
+            }
+            function d (i, j) {
+                x.beginPath();
+                x.moveTo(i.x, i.y);
+                x.lineTo(j.x, j.y);
+                var k = j.x + (z() * 2 - 0.25) * f,
+                    n = y(j.y);
+                x.lineTo(k, n);
+                x.closePath();
+                r -= u / -50;
+                x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+                x.fill();
+                q[0] = q[1];
+                q[1] = { x: k, y: n }
+            }
+            function y (p) {
+                var t = p + (z() * 2 - 1.1) * f;
+                return (t > h || t < 0) ? y(p) : t;
+            }
+            document.onclick = evanyou;
+            document.ontouchstart = evanyou;
+            evanyou();
+        }
     };
 
     /**
@@ -97,11 +97,12 @@ function Base() {
         // 更换网站图标
         var linkObject = document.createElement('link');
         linkObject.rel = "shortcut icon";
-        linkObject.href = "https://files.cnblogs.com/files/bndong/blog_logo.gif";
+        // linkObject.href = "https://files.cnblogs.com/files/bndong/blog_logo.gif";
+        linkObject.href = "https://files.cnblogs.com/files/web-2015/blog_logo.gif";
         document.getElementsByTagName("head")[0].appendChild(linkObject);
 
         // 添加网站PV量监控
-        if (window.location.href.search("www.cnblogs.com/bndong") != -1 ) {bndongJs.addWebPv();} else {bndongJs.setTheme();}
+        if (window.location.href.search("www.cnblogs.com/web-2015") != -1 ) {bndongJs.addWebPv();} else {bndongJs.setTheme();}
 
         // 设置菜单侧边栏内容
         setMenuDataTId = window.setInterval( bndongJs.setMenuData, 1000 );
@@ -528,7 +529,7 @@ function Base() {
         var pvHtml =  '<i class="iconfont icon-odps-data cnzz" style="position: relative;top: 2px;left: 3px;cursor: pointer;"></i>';
         // 请去 AmazingCounters.com 配置自己的，谢谢！！
         pvHtml += '<img border="0" src="https://cc.amazingcounters.com/counter.php?i=3217893&amp;c=9653992" s="AmazingCounters.com" style="opacity: 0.5; margin-left: 7px;cursor: pointer;">';
-        pvHtml += '<div>【事实并非理所当然🌈世界总是欲盖弥彰】</div>';
+        pvHtml += '<div>【世界上只有一种真正的英雄主义 🌈 就是认清了生活的真相后还依然热爱它。❤️】</div>';
         pvHtml += "<div>PHP \\ Java \\ Python \\ Linux \\ JavaScript<span class='my-face'>ღゝ◡╹)ノ♡</span></div>";
         pvHtml += '<div id="cnzzInfo"></div>';
         $('#footer').append(pvHtml);
@@ -560,7 +561,7 @@ function Base() {
         $('#footer').prepend('<div class="footer-image"></div>');
         setInterval(function(){
             var footer = $('#footer');
-            var themeHtml = '<p id="ThemeAuthors" style="color: #444;z-index: 999;">[ Theme Authors：<a href="https://www.cnblogs.com/bndong/" target="_blank" style="color:#444;">BNDong</a> ]</p></div>';
+            var themeHtml = '<p id="ThemeAuthors" style="color: #444;z-index: 999;">[ Theme Authors：<a href="https://www.cnblogs.com/web-2015/" target="_blank" style="color:#444;">Damon°</a> ]</p></div>';
             $('#ThemeAuthors').show();
             if ($('#ThemeAuthors').length == 0) {
                 $('#footer').append(themeHtml);

@@ -1266,7 +1266,7 @@ button {
     line-height: 1.5;
 }
 .footer-image {
-    background: url(https://raw.githubusercontent.com/BNDong/Cnblogs-Theme-SimpleMemory/master/img/footer.png) no-repeat 50%;
+    background: url(https://raw.githubusercontent.com/Zhou-Hepeng/Cnblogs-Theme-SimpleMemory/master/img/footer.png) no-repeat 50%;
     height: 368px;
     z-index: 1;
     position: absolute;
@@ -2965,7 +2965,7 @@ button {
 }
 
 .postBody blockquote {
-    background: url('images/comment.gif')) no-repeat 25px 0px;
+    background: url('images/comment.gif') no-repeat 25px 0px;
     min-height: 35px;
     _height: 35px;
     line-height: 1.6em;
@@ -3009,7 +3009,7 @@ button {
     /*margin-bottom: 5rem;*/
     text-align: center;
     /*background: #222 url(https://files.cnblogs.com/files/bndong/top_bg4.gif) center center no-repeat;*/
-    background: #222 url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-9424.jpg) center center no-repeat;
+    background: #222 url(http://images.cnblogs.com/cnblogs_com/web-2015/1287364/o_elf.png) center center no-repeat;
     background-size: cover;
     overflow: hidden;
     position: absolute;
@@ -3224,22 +3224,22 @@ button {
 
 #sb-classify li {
     padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/bndong/table_logo.gif) 12px center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/web-2015/table_logo.gif) 12px center no-repeat;
 }
 
 #sb-record li {
     padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/bndong/time_logo.gif) 12px center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/web-2015/time_logo.gif) 12px center no-repeat;
 }
 
 #sb-topview li {
     padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/bndong/view_logo.gif) 12px center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/web-2015/view_logo.gif) 12px center no-repeat;
 }
 
 #sb-topDiggPosts li {
     padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/bndong/digg_logo.gif) 12px center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/web-2015/digg_logo.gif) 12px center no-repeat;
 }
 
 .introduce-box {
@@ -3258,7 +3258,7 @@ button {
     outline: none;
     cursor: pointer;
     /*background: #000 url(https://raw.githubusercontent.com/BNDong/Cnblogs-Theme-SimpleMemory/master/img/menu_bg.jpeg) 0 -195px no-repeat;*/
-    background: #000 url(https://files.cnblogs.com/files/bndong/me_top_bg.gif) center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/web-2015/me_top_bg.gif) center no-repeat;
     background-size: 100%;
 }
 
@@ -3726,7 +3726,7 @@ span.cnblogs_code {
 }
 
 .cnblogs_code_copy a {
-    background: url(https://files.cnblogs.com/files/bndong/copy_16px.gif) top left;
+    background: url(https://files.cnblogs.com/files/web-2015/copy_16px.gif) top left;
     background-repeat: no-repeat;
     display: inline-block;
     padding: 0;
@@ -3764,7 +3764,7 @@ span.cnblogs_code {
     padding: 10px;
     height: 200px;
     position: relative;
-    background: #fff url(https://raw.githubusercontent.com/BNDong/Cnblogs-Theme-SimpleMemory/master/img/comment_bg.jpg) right -65px;
+    background: #fff url(https://raw.githubusercontent.com/Zhou-Hepeng/Cnblogs-Theme-SimpleMemory/master/img/comment_bg.jpg) right -65px;
     background-size: 250px;
     background-repeat: no-repeat;
 }
@@ -3808,7 +3808,7 @@ span.cnblogs_code {
 }
 
 .tbCommentBody_bg {
-    background: url('https://files.cnblogs.com/files/bndong/commentHintBg.gif') center center no-repeat;
+    background: url('https://files.cnblogs.com/files/web-2015/commentHintBg.gif') center center no-repeat;
 }
 
 .commentbox_main {
@@ -3835,9 +3835,9 @@ span.cnblogs_code {
 .list .out .icon,.list .inc .icon{width:48px;height:48px;}
 .list .icontd {width:48px;}
 .list .out .icontd{display:none;}
-.list .out .topleft,.list .out .topright,.list .out .bottomleft,.list .out .bottomright,.list .inc .topleft,.list .inc .topright,.list .inc .bottomleft,.list .inc .bottomright{background: url(https://files.cnblogs.com/files/bndong/t_o_bubbles.gif) no-repeat;}
-.list .out .top,.list .out .bottom,.list .inc .top,.list .inc .bottom{background:transparent url(https://files.cnblogs.com/files/bndong/t_o_horizontal.gif) repeat-x;}
-.list .out .left,.list .out .right,.list .inc .left,.list .inc .right{background:transparent url(https://files.cnblogs.com/files/bndong/t_o_vertical.gif) repeat-y;}
+.list .out .topleft,.list .out .topright,.list .out .bottomleft,.list .out .bottomright,.list .inc .topleft,.list .inc .topright,.list .inc .bottomleft,.list .inc .bottomright{background: url(https://files.cnblogs.com/files/web-2015/t_o_bubbles.gif) no-repeat;}
+.list .out .top,.list .out .bottom,.list .inc .top,.list .inc .bottom{background:transparent url(https://files.cnblogs.com/files/web-2015/t_o_horizontal.gif) repeat-x;}
+.list .out .left,.list .out .right,.list .inc .left,.list .inc .right{background:transparent url(https://files.cnblogs.com/files/web-2015/t_o_vertical.gif) repeat-y;}
 
 .list .out .topleft{background-position:left top;height:9px;width:18px;}
 .list .out .topright{background-position:-18px top;height:9px;width:11px;}
@@ -4031,7 +4031,7 @@ a#green_channel_wechat {
         line-height: 1.3em;
     }
 
-    #sideToolbar, #music-box, .scroll-down, #evanyou, #canvas, #aplayer {
+    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer {
         display: none !important;
     }
 
@@ -4098,7 +4098,7 @@ a#green_channel_wechat {
         width: 31px !important;
     }
 
-    #sideToolbar, #music-box, .scroll-down, #evanyou, #canvas, #aplayer {
+    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer {
         display: none !important;
     }
 
