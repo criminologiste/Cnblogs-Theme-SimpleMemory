@@ -528,7 +528,7 @@ function Base() {
     this.addWebPv = function() {
         var pvHtml =  '<i class="iconfont icon-odps-data cnzz" style="position: relative;top: 2px;left: 3px;cursor: pointer;"></i>';
         // 请去 AmazingCounters.com 配置自己的，谢谢！！
-        pvHtml += '<img border="0" src="http://cc.amazingcounters.com/counter.php?i=3226342&c=9679339" s="AmazingCounters.com" style="opacity: 0.5; margin-left: 7px;cursor: pointer;">';
+        pvHtml += '<span id="amazingStatSpan"><span id="amazingStat" style=""><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3226342&c=9679339" s="AmazingCounters.com" style="opacity: 0.5; margin-left: 7px;cursor: pointer;"></span></span>';
         pvHtml += '<div>【世界上只有一种真正的英雄主义 🌈 就是认清了生活的真相后还依然热爱它。❤️】</div>';
         pvHtml += "<div><span class='my-face'>ღゝ◡╹)ノ♡</span></div>";
         pvHtml += '<div id="cnzzInfo"></div>';
