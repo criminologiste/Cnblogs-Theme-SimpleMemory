@@ -535,8 +535,19 @@ function Base() {
         $('#footer').append(pvHtml);
         $('#footer').prepend('<div class="footer-image"></div>');
 
-        setCnzzTId = window.setInterval( bndongJs.setCnzz, 1000 );
+        if (window.location.href.search("www.cnblogs.com/bndong") == -1 ) {
+            bndongJs.setTheme();
+        }
 
+        window.setInterval( bndongJs.setRunTime, 500 );
+        setCnzzTId    = window.setInterval( bndongJs.setCnzz, 1000 );
+        setAmazingTId = window.setInterval( bndongJs.setAmazing, 1000 );
+    };
+    this.setRunTime = function () {
+        var str = $('#blogStartTimeInput').val();
+        str = str ? str : '2016-11-17';
+        var runDate = tools.getRunDate(str);
+        $('#blogRunTimeSpan').text('This blog has running : '+runDate.daysold+' d '+runDate.hrsold+' h '+runDate.minsold+' m '+runDate.seconds+' s');
     };
     this.setCnzz = function() {
         // 请去 CNZZ 配置自己的，谢谢！！
