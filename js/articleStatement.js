@@ -48,7 +48,7 @@ $(document).ready(function(){
     cc = cc.split("#")[0];
     var fileid = cc.split("?");            // 把参数和文件名分割开
     var uid = fileid[0].replace('.html', '');
-    var bottom_html = '<br><p style="padding-top: 0; padding-right: 10px; padding-bottom: 10px; padding-left: 70px; background: url(https://files.cnblogs.com/files/bndong/cat.gif) #f7f7f7 no-repeat 12.5px 50%; font-family: 微软雅黑; font-size: 12px; border: #e0e0e0 1px dashed;">';
+    var bottom_html = '<br><p style="padding-top: 0; padding-right: 10px; padding-bottom: 10px; padding-left: 70px; background: url(https://files.cnblogs.com/files/web-2015/cat.gif) #f7f7f7 no-repeat 12.5px 50%; font-family: 微软雅黑; font-size: 12px; border: #e0e0e0 1px dashed;">';
     bottom_html += '<br>';
     bottom_html += '<span style="font-weight: bold;color: #333; white-space:nowrap;">作　　者</span>：<strong><span style="font-size: 12px; color: red;">';
     var articleAuthor = $('#articleAuthor').val();
@@ -58,9 +58,9 @@ $(document).ready(function(){
     if (articleAuthor != undefined && articleSource != undefined) {
         bottom_html += '<a href="'+articleSource+'" target="_blank">'+articleAuthor+'</a></span></strong> <br>';
         bottom_html += '<span style="font-weight: bold;color: #333; white-space:nowrap;">出　　处</span>：<a href="'+articleSource+'" target="_blank">'+articleSource+'</a>';
-    } else if ( window.location.href.search("www.cnblogs.com/bndong") != -1 ) {
-        bottom_html += '<a href="http://www.cnblogs.com/bndong/" target="_blank">BNDong</a></span></strong> <br>';
-        bottom_html += '<span style="font-weight: bold;color: #333; white-space:nowrap;">出　　处</span>：<a href="http://www.cnblogs.com/bndong/" target="_blank">http://www.cnblogs.com/bndong/</a>';
+    } else if ( window.location.href.search("www.cnblogs.com/web-2015") != -1 ) {
+        bottom_html += '<a href="http://www.cnblogs.com/web-2015/" target="_blank">Damon°</a></span></strong> <br>';
+        bottom_html += '<span style="font-weight: bold;color: #333; white-space:nowrap;">出　　处</span>：<a href="http://www.cnblogs.com/web-2015/" target="_blank">http://www.cnblogs.com/web-2015/</a>';
     } else {
         var str = $('.main-header-content h1').eq(0).text();
         var homeUrl = tmp;
