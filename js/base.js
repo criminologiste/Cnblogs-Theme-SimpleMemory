@@ -42,9 +42,6 @@ function Base() {
         // 初始化菜单滚动条样式
         $('#menuWrap').optiscroll({ forceScrollbars: true, maxTrackSize: 20, preventParentScroll: true });
 
-        // 音乐播放器初始化
-        bndongJs.musicInit();
-
         // 滚动监听
         $(window).scroll( function() { bndongJs.scrollMonitor(); });
 
@@ -252,7 +249,7 @@ function Base() {
      */
     this.setNotHomeTopImg = function() {
         $('.main-header').css('height', '40vh');
-        $('.main-header').css('background', '#222 url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-569548.png)  center center no-repeat');
+        $('.main-header').css('background', '#222 url(https://www.cnblogs.com/images/cnblogs_com/web-2015/1287364/o_wallhaven-666357.jpg)  center center no-repeat');
         $('.main-header').css('background-size', 'cover');
         $('.vertical').css('display', 'none');
         $('.scroll-down').css('display', 'none');
@@ -318,12 +315,6 @@ function Base() {
             });
             $(".louzhu").closest(".feedbackItem").find(".out").removeClass("out").addClass("inc");
         }
-    };
-
-    /**
-     * 播放器初始化
-     */
-    this.musicInit = function() {
     };
 
     /**

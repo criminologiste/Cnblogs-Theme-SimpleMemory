@@ -3009,7 +3009,7 @@ button {
     /*margin-bottom: 5rem;*/
     text-align: center;
     /*background: #222 url(https://files.cnblogs.com/files/bndong/top_bg4.gif) center center no-repeat;*/
-    background: #222 url(http://images.cnblogs.com/cnblogs_com/web-2015/1287364/o_elf.png) center center no-repeat;
+    background: #222 url(https://www.cnblogs.com/images/cnblogs_com/web-2015/1287364/o_wallhaven-698904.jpg) center center no-repeat;
     background-size: cover;
     overflow: hidden;
     position: absolute;
@@ -3258,7 +3258,7 @@ button {
     outline: none;
     cursor: pointer;
     /*background: #000 url(https://raw.githubusercontent.com/BNDong/Cnblogs-Theme-SimpleMemory/master/img/menu_bg.jpeg) 0 -195px no-repeat;*/
-    background: #000 url(https://files.cnblogs.com/files/web-2015/me_top_bg.gif) center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/bndong/me_top_bg.gif) center no-repeat;
     background-size: 100%;
 }
 
