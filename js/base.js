@@ -202,31 +202,31 @@ function Base() {
             '有的人25岁就死了，只是到75岁才埋葬'
         ];
 
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://api.hibai.cn/api/index/index",
-            "method": "POST",
-            "headers": {
-                "content-type": "application/x-www-form-urlencoded",
-            },
-            "data": {
-                "TransCode": "030111",
-                "OpenId": "123456789",
-                "Body": ""
-            }
-        };
+        // var settings = {
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "url": "https://api.hibai.cn/api/index/index",
+        //     "method": "POST",
+        //     "headers": {
+        //         "content-type": "application/x-www-form-urlencoded",
+        //     },
+        //     "data": {
+        //         "TransCode": "030111",
+        //         "OpenId": "123456789",
+        //         "Body": ""
+        //     }
+        // };
 
-        $.ajax(settings).done(function (response) {
-            if (response.ResultCode == 1) {
-                $('#hitokoto').text(response.Body.word).show();
-                $('#hitokotoAuthor').text('- '+response.Body.word_from).show();
-            } else {
-                var listIndex = tools.randomNum(0, topTitleList.length - 1);
-                $('#hitokoto').text(topTitleList[listIndex]).show();
-            }
-            return false;
-        });
+        // $.ajax(settings).done(function (response) {
+        //     if (response.ResultCode == 1) {
+        //         $('#hitokoto').text(response.Body.word).show();
+        //         $('#hitokotoAuthor').text('- '+response.Body.word_from).show();
+        //     } else {
+        var listIndex = tools.randomNum(0, topTitleList.length - 1);
+        $('#hitokoto').text(topTitleList[listIndex]).show();
+        //     }
+        //     return false;
+        // });
     };
 
     /**
