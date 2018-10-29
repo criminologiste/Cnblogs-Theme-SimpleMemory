@@ -59,7 +59,7 @@ $(document).ready(function(){
         bottom_html += '<a href="'+articleSource+'" target="_blank">'+articleAuthor+'</a></span></strong> <br>';
         bottom_html += '<span style="font-weight: bold;color: #333; white-space:nowrap;">出　　处</span>：<a href="'+articleSource+'" target="_blank">'+articleSource+'</a>';
     } else if ( window.location.href.search("www.cnblogs.com/icaihua") != -1 ) {
-        bottom_html += '<a href="http://www.cnblogs.com/icaihua/" target="_blank">Damon°</a></span></strong> <br>';
+        bottom_html += '<a href="http://www.cnblogs.com/icaihua/" target="_blank">菜花君°</a></span></strong> <br>';
         bottom_html += '<span style="font-weight: bold;color: #333; white-space:nowrap;">出　　处</span>：<a href="http://www.cnblogs.com/icaihua/" target="_blank">http://www.cnblogs.com/icaihua/</a>';
     } else {
         var str = $('.main-header-content h1').eq(0).text();
