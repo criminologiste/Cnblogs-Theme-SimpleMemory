@@ -1,5 +1,5 @@
 # Cnblogs-Theme-SimpleMemory
-基于博皮：SimpleMemory，进行的修改，使用插件较多，所以文件较多。[页面效果](https://www.cnblogs.com/icaihua/)
+基于博皮：SimpleMemory，进行的修改，使用插件较多，所以文件较多。[页面效果](https://www.cnblogs.com/web-2015/)
 <br>支持响应，三个尺寸分别为：(768px,∞px)，(500px,768px]，(0px,500px]
 ## 目录结构
 ```
