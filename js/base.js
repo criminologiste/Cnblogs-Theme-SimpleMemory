@@ -52,11 +52,11 @@ function Base() {
         var linkObject = document.createElement('link');
         linkObject.rel = "shortcut icon";
         // linkObject.href = "https://files.cnblogs.com/files/bndong/blog_logo.gif";
-        linkObject.href = "https://files.cnblogs.com/files/web-2015/blog_logo.gif";
+        linkObject.href = "https://files.cnblogs.com/files/icaihua/blog_logo.gif";
         document.getElementsByTagName("head")[0].appendChild(linkObject);
 
         // 添加网站PV量监控
-        if (window.location.href.search("www.cnblogs.com/web-2015") != -1 ) {bndongJs.addWebPv();} else {bndongJs.setTheme();}
+        if (window.location.href.search("www.cnblogs.com/icaihua") != -1 ) {bndongJs.addWebPv();} else {bndongJs.setTheme();}
 
         // 设置菜单侧边栏内容
         setMenuDataTId = window.setInterval( bndongJs.setMenuData, 1000 );
@@ -249,7 +249,7 @@ function Base() {
      */
     this.setNotHomeTopImg = function() {
         $('.main-header').css('height', '40vh');
-        $('.main-header').css('background', '#222 url(https://www.cnblogs.com/images/cnblogs_com/web-2015/1287364/o_wallhaven-666357.jpg)  center center no-repeat');
+        $('.main-header').css('background', '#222 url(https://www.cnblogs.com/images/cnblogs_com/icaihua/1330033/o_o_wallhaven-666357.jpg)  center center no-repeat');
         $('.main-header').css('background-size', 'cover');
         $('.vertical').css('display', 'none');
         $('.scroll-down').css('display', 'none');
@@ -483,7 +483,7 @@ function Base() {
         $('#footer').append(pvHtml);
         $('#footer').prepend('<div class="footer-image"></div>');
 
-        if (window.location.href.search("www.cnblogs.com/web-2015") == -1 ) {
+        if (window.location.href.search("www.cnblogs.com/icaihua") == -1 ) {
             bndongJs.setTheme();
         }
 
@@ -520,7 +520,7 @@ function Base() {
         $('#footer').prepend('<div class="footer-image"></div>');
         setInterval(function(){
             var footer = $('#footer');
-            var themeHtml = '<p id="ThemeAuthors" style="color: #444;z-index: 999;">[ Theme Authors：<a href="https://www.cnblogs.com/web-2015/" target="_blank" style="color:#444;">Damon°</a> ]</p></div>';
+            var themeHtml = '<p id="ThemeAuthors" style="color: #444;z-index: 999;">[ Theme Authors：<a href="https://www.cnblogs.com/icaihua/" target="_blank" style="color:#444;">Damon°</a> ]</p></div>';
             $('#ThemeAuthors').show();
             if ($('#ThemeAuthors').length == 0) {
                 $('#footer').append(themeHtml);
