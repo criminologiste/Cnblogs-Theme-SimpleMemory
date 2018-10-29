@@ -210,6 +210,7 @@
                 this._canvas.style["width"] = "100%";
                 this._canvas.style["height"] = "100%";
                 this._canvas.style["z-index"] = "-1";
+                this._canvas.id = "bgCanvas";
                 this._onResize();
 
                 this._context = this._canvas.getContext("2d");
@@ -446,15 +447,5 @@
 });
 
 
-new Ribbons({
-    colorSaturation: "60%",
-    colorBrightness: "50%",
-    colorAlpha: 0.5,
-    colorCycleSpeed: 5,
-    verticalPosition: "random",
-    horizontalSpeed: 200,
-    ribbonCount: 3,
-    strokeSize: 0,
-    parallaxAmount: -0.2,
-    animateSections: true });
+new Ribbons(window.cnblogsConfig.backgroundAnimation);
 //# sourceURL=pen.js

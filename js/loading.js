@@ -1594,33 +1594,11 @@ var Spinner = function () {
 
 // Custom SETTINGS for each demo in related index.html
 
-var settings = {
-    rebound: {
-        tension: 16,
-        friction: 5
-    },
-    spinner: {
-        id: 'spinner',
-        radius: 90,
-        sides: 3,
-        depth: 4,
-        colors: {
-            background: '#f0f0f0',
-            stroke: '#272633',
-            base: null,
-            child: '#272633'
-        },
-        alwaysForward: true, // When false the spring will reverse normally.
-        restAt: 0.5, // A number from 0.1 to 0.9 || null for full rotation
-        renderBase: false
-    }
-};
-
 /**
  * Demo.
  */
-var demo = {
-    settings: settings,
+var pageLoading = {
+    settings: window.cnblogsConfig.loading,
 
     spring: null,
     spinner: null,
@@ -1633,13 +1611,13 @@ var demo = {
      */
     initRebound: function initRebound() {
 
-        var settings = demo.settings.rebound;
+        var settings = pageLoading.settings.rebound;
 
         // Create a SpringSystem.
         var springSystem = new rebound.SpringSystem();
 
         // Add a spring to the system.
-        demo.spring = springSystem.createSpring(settings.tension, settings.friction);
+        pageLoading.spring = springSystem.createSpring(settings.tension, settings.friction);
     },
 
 
@@ -1648,10 +1626,10 @@ var demo = {
      */
     initSpinner: function initSpinner() {
 
-        var settings = demo.settings.spinner;
+        var settings = pageLoading.settings.spinner;
 
         // Instantiate Spinner.
-        demo.spinner = new Spinner(settings);
+        pageLoading.spinner = new Spinner(settings);
     },
 
 
@@ -1663,21 +1641,21 @@ var demo = {
         var spinnerTypeAutoSpin = true;
 
         // Instantiate animation engine and spinner system.
-        demo.initRebound();
-        demo.initSpinner();
+        pageLoading.initRebound();
+        pageLoading.initSpinner();
 
         // Init animation with Rebound Spring System.
-        demo.spinner.init(demo.spring, spinnerTypeAutoSpin);
+        pageLoading.spinner.init(pageLoading.spring, spinnerTypeAutoSpin);
 
         if (spinnerTypeAutoSpin) {
             // Fake loading time, in a real world just call demo.spinner.setComplete();
             // whenever the preload will be completed.
             setTimeout(function () {
-                demo.spinner.setComplete();
+                pageLoading.spinner.setComplete();
             }, 6000);
         } else {
             // Perform real ajax request.
-            demo.loadSomething();
+            pageLoading.loadSomething();
         }
     },
 
@@ -1697,13 +1675,13 @@ var demo = {
 
                 // By setting the end value with the actual loading percentage
                 // the spinner will progress based on the actual ajax loading time.
-                demo.spring.setEndValue(percent * 0.01);
+                pageLoading.spring.setEndValue(percent * 0.01);
             }
         });
 
         oReq.addEventListener('load', function (e) {
             // Complete the loading animation.
-            demo.spinner.setComplete();
+            pageLoading.spinner.setComplete();
         });
 
         oReq.open('GET', '/img/something.jpg');

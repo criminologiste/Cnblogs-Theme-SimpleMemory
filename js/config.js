@@ -28,12 +28,12 @@ require.config({
         marvin: setFileNameMin('marvin.nav2', 'js'),
         //-- 文章后缀
         articleStatement: setFileNameMin('articleStatement', 'js'),
-        //-- 主页动画
+        //-- 主页头图动画
         circleMagic: setFileNameMin('circleMagic', 'js'),
-        //-- 非主页动画
+        //-- 非主页头图动画
         TweenMax: setFileNameMin('TweenMax.min', 'js'),
         MyTween: setFileNameMin('MyTween', 'js'),
-		//-- 背景动画：丝带（随机）
+	//-- 背景动画：丝带（随机）
         RibbonsEffect: setFileNameMin('RibbonsEffect', 'js'),
         //-- tools
         tools: setFileNameMin('tools', 'js'),
@@ -63,7 +63,7 @@ require.config({
         base: {
             deps: [
                 'tools',
-                'css!https://at.alicdn.com/t/font_543384_hfku19m6z8ouhaor.css', // 阿里云字体图标
+                'css!https://at.alicdn.com/t/font_543384_aoyznpn9i46.css', // 阿里云字体图标
                 'css!https://cdn.webfont.youziku.com/webfonts/nomal/111379/47284/5a531cbbf629dc07a8fbd011.css', // 有字库字体
             ]
         }

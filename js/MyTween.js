@@ -1,19 +1,19 @@
 var mouseX = mouseY = mouseOldX = mouseOldY = 0,
                     C,c,viewWidth,viewHeight,
-                    triW = 14,
-                    triH = 20,
-                    neighbours = ["side", "top", "bottom"],
-                    speedTrailAppear = .1,
-                    speedTrailDisappear = .1,
-                    speedTriOpen = 1,
-                    trailMaxLength = 30,
-                    trailIntervalCreation = 100,
-                    delayBeforeDisappear = 2,
+                    triW = window.cnblogsConfig.essayTopAnimation.triW,
+                    triH = window.cnblogsConfig.essayTopAnimation.triH,
+                    neighbours = window.cnblogsConfig.essayTopAnimation.neighbours,
+                    speedTrailAppear = window.cnblogsConfig.essayTopAnimation.speedTrailAppear,
+                    speedTrailDisappear = window.cnblogsConfig.essayTopAnimation.speedTrailDisappear,
+                    speedTriOpen = window.cnblogsConfig.essayTopAnimation.speedTriOpen,
+                    trailMaxLength = window.cnblogsConfig.essayTopAnimation.trailMaxLength,
+                    trailIntervalCreation = window.cnblogsConfig.essayTopAnimation.trailIntervalCreation,
+                    delayBeforeDisappear = window.cnblogsConfig.essayTopAnimation.delayBeforeDisappear,
                     cols, rows,
                     tris,
                     randomAlpha = true,
 
-                    colors = ["#D9B6D4", "#A29AC3", "#9091BF", "#9394C2", "#FBCACE", "#7E84B8", "#FCD5CE", "#6C79B5"]
+                    colors = window.cnblogsConfig.essayTopAnimation.colors;
 
             Triangle = function(pos, column, row) {
                 var thisTri = this;
@@ -226,7 +226,11 @@ var mouseX = mouseY = mouseOldX = mouseOldY = 0,
                 var trailLength = Math.floor(Math.random() * trailMaxLength - 2) + 2;
                 var index = Math.round(Math.random() * tris.length);
                 startTri = tris[index];
-                if (typeof(startTri.selectedForTrail) != 'undefined') {startTri.selectedForTrail = true};
+                if (typeof(startTri) != "undefined" && typeof(startTri.selectedForTrail) != "undefined") {
+                    startTri.selectedForTrail = true;
+                } else {
+                    return false;
+                }
                 currentTri = {
                     tri: startTri,
                     openDir: "side",

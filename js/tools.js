@@ -1,5 +1,5 @@
 function myTools() {
-    var bndongTools = this;
+    var caihuaTools = this;
     var colors      = {
         "gray": "color: #1B2B34;font-size: 12px; line-height: 18px;",
         "red": "color: #EC5f67;font-size: 12px; line-height: 18px;",
@@ -37,14 +37,14 @@ function myTools() {
                 var colorList = [colors.red, colors.orange, colors.yellow, colors.green, colors.teal, colors.blue, colors.purple, colors.brown];
                 $.each(list, function (i) {
                     var str = list[i];
-                    var ind = bndongTools.randomNum(0, colorList.length - 1);
+                    var ind = caihuaTools.randomNum(0, colorList.length - 1);
                     console.log('%c'+str, colorList[ind]);
                 });
                 break;
             case 'banner':
-                console.log('\n' + ' %c BNDong CNBlogs %c https://www.cnblogs.com/bndong ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
-                console.log('\n' + ' %c BNDong GitHub %c https://github.com/BNDong ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
-                console.log('\n' + ' %c BNDong Email %c dbuo@foxmail.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+                console.log('\n' + ' %c 菜花君 CNBlogs %c https://www.cnblogs.com/icaihua ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+                console.log('\n' + ' %c 菜花君 GitHub %c https://github.com/Zhou-Hepeng ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+                console.log('\n' + ' %c 菜花君 Email %c 512663864@qq.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
                 break;
 
             default:
@@ -95,36 +95,6 @@ function myTools() {
         var subStr = new RegExp('\<script.*\<\/script\>', 'ig');
         return str.replace(subStr,"");
     };
-
-        /**
-     * 运行时间
-     * @param dateString 年-月-日
-     */
-    this.getRunDate = function (dateString) {
-        dateString = (dateString).toString().split('-');
-        var date = new Date();
-        date.setUTCFullYear(dateString[0], dateString[1] - 1, dateString[2]);
-        date.setUTCHours(0, 0, 0, 0);
-        var birthDay = date;
-        var today = new Date();
-        var timeold = today.getTime() - birthDay.getTime();
-        var sectimeold = timeold / 1000;
-        var secondsold = Math.floor(sectimeold);
-        var msPerDay = 24 * 60 * 60 * 1000;
-        var e_daysold = timeold / msPerDay;
-        var daysold = Math.floor(e_daysold);
-        var e_hrsold = (daysold - e_daysold) * -24;
-        var hrsold = Math.floor(e_hrsold);
-        var e_minsold = (hrsold - e_hrsold) * -60;
-        var minsold = Math.floor((hrsold - e_hrsold) * -60);
-        var seconds = Math.floor((minsold - e_minsold) * -60).toString();
-        return {
-            daysold: daysold,
-            hrsold: hrsold,
-            minsold: minsold,
-            seconds: seconds
-        };
-    }
 
     /**
      * 运行时间

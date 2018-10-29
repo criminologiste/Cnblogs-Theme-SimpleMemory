@@ -54,13 +54,13 @@ body {
     -moz-font-feature-settings: 'kern' 1;
     -o-font-feature-settings: 'kern' 1;
     overflow: hidden;
-    /*background: url(https://files.cnblogs.com/files/bndong/white_brick_wall.gif) rgb(255, 255, 255);*/
+    /*background: url(https://files.cnblogs.com/files/icaihua/white_brick_wall.gif) rgb(255, 255, 255);*/
     /*background-attachment: fixed;*/
 }
 
 body:before {
     content: '';
-    /*background: url(https://files.cnblogs.com/files/bndong/white_brick_wall.gif) #fff;*/
+    /*background: url(https://files.cnblogs.com/files/icaihua/white_brick_wall.gif) #fff;*/
     display: block;
     z-index: -1;
     position: fixed;
@@ -164,9 +164,8 @@ button {
     margin: 0 auto;
     width: 65%;
     max-width: 840px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 0 30px 30px 30px;
-    margin-top: 100vh;
 }
 
 #header {
@@ -1251,7 +1250,7 @@ button {
 
 /*****留言页面开始*****************************/
 #footer {
-    min-height: 78px;
+    min-height: 100px;
     _height: 15px;
     position: absolute;
     margin: 0;
@@ -1270,7 +1269,7 @@ button {
     height: 368px;
     z-index: 1;
     position: absolute;
-    bottom: 48px;
+    bottom: 70px;
     width: 100%;
     pointer-events: none;
 }
@@ -2965,7 +2964,7 @@ button {
 }
 
 .postBody blockquote {
-    background: url('images/comment.gif') no-repeat 25px 0px;
+    background: url('images/comment.gif')) no-repeat 25px 0px;
     min-height: 35px;
     _height: 35px;
     line-height: 1.6em;
@@ -2996,7 +2995,7 @@ button {
 }
 
 /**************************************************
-    自添加样式@ BNDong
+    自添加样式@ Zhou-Hepeng
 **************************************************/
 
 /* ==========================================================================
@@ -3006,10 +3005,10 @@ button {
     display: table;
     width: 100%;
     height: 100vh;
+    max-height: 100vh;
     /*margin-bottom: 5rem;*/
     text-align: center;
-    /*background: #222 url(https://files.cnblogs.com/files/bndong/top_bg4.gif) center center no-repeat;*/
-    background: #222 url(https://www.cnblogs.com/images/cnblogs_com/icaihua/1330033/o_o_wallhaven-698904.jpg) center center no-repeat;
+    background: #222 url(https://files.cnblogs.com/files/icaihua/top_bg4.gif) center center no-repeat;
     background-size: cover;
     overflow: hidden;
     position: absolute;
@@ -3022,13 +3021,13 @@ button {
 .inner {
     position: relative;
     width: 80%;
-    max-width: 710px;
+    max-width: 800px;
     margin: 0 auto;
+    padding: 10px;
 }
 
-.page-title {
+.page-title, .sb-title {
     margin: 10px 0 10px 0;
-    font-size: 5rem;
     letter-spacing: -1px;
     font-weight: 700;
     font-family: "Open Sans", sans-serif;
@@ -3038,6 +3037,14 @@ button {
     -webkit-animation-delay: 0.6s;
     animation-delay: 0.5s;
     text-shadow: 0 3px 6px rgba(0,0,0, 0.3);
+}
+
+.page-title {
+    font-size: 5rem;
+}
+
+.sb-title {
+    font-size: 4rem;
 }
 
 /* Centres vertically yo. (IE8+) */
@@ -3061,6 +3068,9 @@ button {
     animation-delay: 0.3s;
     text-shadow: 0 3px 6px rgba(0,0,0, 0.5);
     display: none;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
 }
 
 .page-author {
@@ -3181,15 +3191,16 @@ button {
     width: 35px !important;
 }
 
-.classify-title, .nav-title, .record-title, .topview-title, .topDiggPosts-title {
+.m-list-title {
     position: relative;
     border-bottom: #3B3B3B 1px solid;
     word-wrap: break-word;
     margin: 20px 0;
     font-family: "Merriweather","Open Sans","Microsoft Jhenghei","Microsoft Yahei",sans-serif;
+    display: none;
 }
 
-.classify-title:after, .nav-title:after, .record-title:after, .topview-title:after, .topDiggPosts-title:after{
+.m-list-title span{
     display: block;
     width: 60px;
     text-align: center;
@@ -3200,46 +3211,6 @@ button {
     background: #000;
     box-shadow: #000 0 0 0 6px;
     color: #B8B8B8;
-}
-
-.classify-title:after {
-    content: "随笔分类";
-}
-
-.nav-title:after {
-    content: "导航";
-}
-
-.record-title:after {
-    content: "随笔档案";
-}
-
-.topview-title:after {
-    content: "阅读排行";
-}
-
-.topDiggPosts-title:after {
-    content: "推荐排行";
-}
-
-#sb-classify li {
-    padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/icaihua/table_logo.gif) 12px center no-repeat;
-}
-
-#sb-record li {
-    padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/icaihua/time_logo.gif) 12px center no-repeat;
-}
-
-#sb-topview li {
-    padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/icaihua/view_logo.gif) 12px center no-repeat;
-}
-
-#sb-topDiggPosts li {
-    padding-left: 22px;
-    background: #000 url(https://files.cnblogs.com/files/icaihua/digg_logo.gif) 12px center no-repeat;
 }
 
 .introduce-box {
@@ -3257,8 +3228,7 @@ button {
     transition-delay: 0.4s;
     outline: none;
     cursor: pointer;
-    /*background: #000 url(https://raw.githubusercontent.com/BNDong/Cnblogs-Theme-SimpleMemory/master/img/menu_bg.jpeg) 0 -195px no-repeat;*/
-    background: #000 url(https://files.cnblogs.com/files/bndong/me_top_bg.gif) center no-repeat;
+    background: #000 url(https://files.cnblogs.com/files/icaihua/me_top_bg.gif) center no-repeat;
     background-size: 100%;
 }
 
@@ -3321,12 +3291,13 @@ button {
    文章详情页
    ========================================================================== */
 .post-del-title {
-    position: absolute !important;
-    top: 17vh !important;
-    z-index: 999 !important;
-    color: rgb(255, 255, 255) !important;
-    font-size: 34px !important;
-    overflow: hidden !important;
+    /*position: absolute !important;*/
+    /*top: 17vh !important;*/
+    /*z-index: 999 !important;*/
+    /*color: rgb(255, 255, 255) !important;*/
+    /*font-size: 34px !important;*/
+    /*overflow: hidden !important;*/
+    display: none;
 }
 
 #topics {
@@ -3351,6 +3322,31 @@ button {
     line-height: 32px;
     padding: 0px 0 0 30px;
     color: #333;
+}
+
+#cnblogs_post_body h3 {
+    margin: 0 15px !important;
+}
+
+#cnblogs_post_body h3:before {
+    content: '# ';
+    font-weight: lighter;
+    color: #aaa;
+    transition: all 0.3s;
+}
+
+#cnblogs_post_body ul {
+    margin-left: 30px;
+    margin-top: 5px;
+    padding-left: 0;
+}
+
+#cnblogs_post_body ul li {
+    margin-left: 18px;
+}
+
+.postBody li, .postCon li {
+    margin-bottom: 0.5em;
 }
 
 .feedback_area_title, #commentform_title, .entrylistTitle {
@@ -3497,6 +3493,16 @@ button {
     display: table-cell;
     padding: 0 20px;
 }
+
+#cnblogs_post_body p {
+    margin: 10px auto;
+    text-indent: 30px;
+}
+
+#cnblogs_post_body ul li {
+    margin-left: 18px;
+}
+
 /* ==========================================================================
    文章标题
    ========================================================================== */
@@ -3510,7 +3516,13 @@ button {
     position: relative;
     display: inline-block;
     left: -35px;
-    margin: 25px 0 5px 0;
+    margin: 25px 0 0px 0;
+    width: 110%;
+    transition: border-color 0.3s;
+    padding-bottom: 14px;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(to right, #f5f5f5, #eee);
+    border-image-slice: 30;
 }
 /* ---------------------------------------- */
 .header__dev {
@@ -3541,7 +3553,7 @@ button {
     transform: rotateZ(22deg);
 }
 .header__span h1 .dev__slash {
-    color: #3E558B;
+    color: #5D69A5;
     top: -24px;
     left: 57px;
     font-size: 35px;
@@ -3581,6 +3593,7 @@ button {
     font-weight: 400;
     -webkit-transform: rotateZ(-22deg);
     transform: rotateZ(-22deg);
+    color: #333;
 }
 .header__span h1 .dev__fe i {
     text-indent: -9px;
@@ -3675,16 +3688,18 @@ span.cnblogs_code {
 }
 .cnblogs_code {
     line-height: 20px;
-    margin: 0;
+    margin: 0 auto;
+    width: 94%;
     font-size: 14px!important;
     padding: 1.3em;
     background-color: #f9f9f9;
     position: relative;
     overflow: hidden;
-    border: 1px dashed #d9d9d9;
-    font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace !important;
+    border: 0;
+    font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace!important;
     font-weight: 400;
     margin-bottom: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .cnblogs_code pre {
@@ -3693,21 +3708,23 @@ span.cnblogs_code {
     white-space: pre-wrap;
     font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace !important;
     font-weight: 400;
+    background-color: #f9f9f9;
 }
 
 .cnblogs_code span {
     font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace !important;
     font-size: 14px !important;
     font-weight: 400;
+    background-color: #f9f9f9;
 }
 
 .cnblogs_code div {
-    background-color: #f7f7f7;
+    background-color: #f9f9f9;
 }
 
 .cnblogs_code_collapse {
     border: 0px;
-    background: rgb(247, 247, 247);
+    background-color: #f9f9f9;
     cursor: pointer;
     color: rgb(85, 85, 85);
     top: 1px;
@@ -3989,11 +4006,48 @@ a#green_channel_wechat {
     margin-right: 7px;
 }
 
+
 /* ==========================================================================
-   Media Queries - Smaller than 768px
+   页脚
+   ========================================================================== */
+#footerTextIcon {
+    display: inline-block;
+    animation: beating 1s infinite;
+    animation-timing-function: ease-out;
+    margin: 0 3px;
+}
+
+@keyframes beating {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.6);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.6);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ==========================================================================
+   Media Queries - Smaller than 1200px
    ========================================================================== */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
 
     .main-header {
         -webkit-box-sizing: border-box;
@@ -4001,11 +4055,13 @@ a#green_channel_wechat {
         box-sizing: border-box;
         min-height: 240px;
         height: 60vh;
+        max-height: 60vh;
         padding: 15% 0;
     }
 
     #home {
-        margin-top: 60vh;
+        width:85%;
+        max-width:100vw;
     }
 
     .postTitle a:link, .entrylistPosttitle a:link{
@@ -4021,9 +4077,15 @@ a#green_channel_wechat {
         letter-spacing: -1px;
     }
 
+    .sb-title {
+        font-size: 3.5rem;
+        letter-spacing: -1px;
+    }
+
     .page-description {
         font-size: 1.8rem;
         line-height: 1.5em;
+        -webkit-line-clamp: 4;
     }
 
     .page-author {
@@ -4031,29 +4093,50 @@ a#green_channel_wechat {
         line-height: 1.3em;
     }
 
-    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer {
+    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer, #homeTopCanvas, #notHomeTopCanvas {
         display: none !important;
-    }
-
-    #myTopCanvas {
-        visibility: hidden;
     }
 }
 
+/* ==========================================================================
+   Media Queries - Smaller than 960px
+   ========================================================================== */
+@media only screen and (max-width: 960px) {
+    .main-header {
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        min-height: 240px;
+        height: 50vh;
+        max-height: 50vh;
+        padding: 15% 0;
+    }
+    #home {
+        width:auto;
+    }
+
+    #pageAnimationOffOn {
+        display: none;
+    }
+
+    #homeTopCanvas, #notHomeTopCanvas, #bgCanvas {
+        display: none !important;
+    }
+}
 
 /* ==========================================================================
-   Media Queries - Smaller than 500px
+   Media Queries - Smaller than 720px
    ========================================================================== */
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 720px) {
 
     .main-header {
         margin-bottom: 15px;
         height: 40vh;
+        max-height: 40vh;
     }
 
     #home {
-        margin-top: 40vh;
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -4080,12 +4163,13 @@ a#green_channel_wechat {
         margin: 2rem auto;
     }
 
-    .page-title, .entrylistPosttitle {
+    .page-title, .sb-title, .entrylistPosttitle {
         font-size: 3rem;
     }
 
     .page-description {
         font-size: 1.6rem;
+        -webkit-line-clamp: 2;
     }
 
     .page-author {
@@ -4098,11 +4182,9 @@ a#green_channel_wechat {
         width: 31px !important;
     }
 
-    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer {
+    #pageAnimationOffOn, #sideToolbar, #music-box, .scroll-down, #evanyou, #canvas, #aplayer,
+    #homeTopCanvas, #notHomeTopCanvas, #bgCanvas
+    {
         display: none !important;
-    }
-
-    #myTopCanvas {
-        visibility: hidden;
     }
 }

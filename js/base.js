@@ -1,68 +1,94 @@
+/*!
+ * DATE: 2018-03-13
+ * UPDATES AND DOCS AT: https://github.com/Zhou-Hepeng
+ * https://www.cnblogs.com/icaihua/
+ * @author: 菜花君, 512663864@qq.com
+ **/
 function Base() {
-    var bndongJs     = this
+
+    var caihuaJs     = this
         ,tools       = new myTools
-        ,progressBar = new ToProgress({ // 进度条插件配置
-        id: 'top-progress-bar',
-        color: '#77b6ff',
-        height: '2px',
-        duration: 0.2
-    }, '#bottomProgressBar')
-        ,temScroll       = 0           // 上一次页面滚动位置
-        ,setMenuDataTId  = ''          // 菜单设置数据定时器ID
-        ,setRightMenuTId = ''          // 右下角菜单设置定时器ID
-        ,setCnzzTId      = ''          // 网站统计设置定时器ID
-        ,setCatalogTId   = '';         // 文章目录设置定时器ID
+        ,progressBar = new ToProgress(window.cnblogsConfig.progressBar, '#bottomProgressBar') // 进度条
+        ,temScroll   = 0  // 上一次页面滚动位置
+
+        /** 定时器 **/
+        ,timeIds    = {
+            setMenuDataTId         : null, // 菜单设置数据定时器ID
+            setHomeRightMenuTId    : null, // 主页右下角菜单设置定时器ID
+            setNotHomeRightMenuTId : null, // 非主页右下角菜单设置定时器ID
+            setCnzzTId             : null, // 网站统计Cnzz设置定时器ID
+            setAmazingTId          : null, // 网站统计Amazing设置定时器ID
+            setCatalogTId          : null, // 文章目录设置定时器ID
+        }
+    ;
 
     /**
      * 初始化
      */
     this.init = function () {
+
         // Loading前初始化
-        bndongJs.loadingBeforeInit();
-        // 页面初始化
-        if ($('#topics').length > 0) { bndongJs.notHomeInit(); } else { bndongJs.homeInit(); }
+        caihuaJs.loadingBeforeInit();
+
         // Loading结束
-        bndongJs.endLoading();
+        caihuaJs.endLoading();
+
         // Loading后初始化
-        bndongJs.loadingAfterInit();
+        caihuaJs.loadingAfterInit();
     };
 
     /**
      * Loading前初始化
      */
     this.loadingBeforeInit = function () {
+
+        // 设置名称
+        $('#homeTopTitle').text(window.cnblogsConfig.blogUser);
+
+        // 设置菜单个人简介头像
+        $('#menuBlogAvatar').append("<img src='"+window.cnblogsConfig.blogAvatar+"'>");
+
         // 背景动画
-		require(['RibbonsEffect']);
+		if (window.cnblogsConfig.isBackgroundAnimation) require(['RibbonsEffect']);
+
+        // 页面初始化
+        ($('#topics').length > 0) ? caihuaJs.notHomeInit() : caihuaJs.homeInit();
     };
 
     /**
      * Loading后初始化
      */
     this.loadingAfterInit = function () {
+
         // 初始化菜单滚动条样式
         $('#menuWrap').optiscroll({ forceScrollbars: true, maxTrackSize: 20, preventParentScroll: true });
 
-        // 滚动监听
-        $(window).scroll( function() { bndongJs.scrollMonitor(); });
+        // 音乐播放器初始化
+        caihuaJs.musicInit();
 
-        // 窗口大小变化监听
-        $(window).resize( function() { bndongJs.resizeMonitor(); });
+        // 滚动监听
+        $(window).scroll( function() { caihuaJs.scrollMonitor(); });
+
+        // 窗口变化监听
+        $(window).resize( function() { caihuaJs.resizeMonitor(); });
 
         // 更换网站图标
-        var linkObject = document.createElement('link');
-        linkObject.rel = "shortcut icon";
-        // linkObject.href = "https://files.cnblogs.com/files/bndong/blog_logo.gif";
-        linkObject.href = "https://files.cnblogs.com/files/icaihua/blog_logo.gif";
+        var linkObject  = document.createElement('link');
+        linkObject.rel  = "shortcut icon";
+        linkObject.href = window.cnblogsConfig.webpageIcon;
         document.getElementsByTagName("head")[0].appendChild(linkObject);
 
-        // 添加网站PV量监控
-        if (window.location.href.search("www.cnblogs.com/icaihua") != -1 ) {bndongJs.addWebPv();} else {bndongJs.setTheme();}
+        // 添加页脚
+        caihuaJs.addFooter();
 
         // 设置菜单侧边栏内容
-        setMenuDataTId = window.setInterval( bndongJs.setMenuData, 1000 );
+        timeIds.setMenuDataTId = window.setInterval( caihuaJs.setMenuData, 1000 );
 
         // html5-title
-        bndongJs.htmlTitle();
+        caihuaJs.htmlTitle();
+
+        // 添加页面特效控制
+        caihuaJs.setPageAnimationControl();
 
         // 控制台输出
         tools.consoleText([], 'banner');
@@ -73,9 +99,28 @@ function Base() {
             console.log(re);
 
             re.toString = function () {
-                return '第 ' + (++i) + ' 次打开控制台';
+                return '欢迎访问本博客，这是您第 ' + (++i) + ' 次打开控制台。';
             };
         })();
+
+        // 延时清除全部定时器
+        setTimeout(caihuaJs.clearIntervalAll, 30000);
+    };
+
+    /**
+     * 清除全部定时器
+     */
+    this.clearIntervalAll = function () {
+        $.each(timeIds, function (e) {
+            null != e && window.clearInterval(e);
+        });
+    };
+
+    /**
+     * 清除单个定时器
+     */
+    this.clearIntervalTimeId = function (timeId) {
+        null != timeId && window.clearInterval(timeId);
     };
 
     /**
@@ -84,7 +129,9 @@ function Base() {
     this.htmlTitle = function() {
         var RelTitle = document.title;
         var hidden,
-            visibilityChange;
+            visibilityChange,
+            timer;
+        
         if (typeof document.hidden !== "undefined") {
             hidden = "hidden";
             visibilityChange = "visibilitychange";
@@ -97,13 +144,16 @@ function Base() {
         }
 
         function handleVisibilityChange() {
+            if (timer) clearTimeout(timer);
             if (document[hidden]) {
-                $('#myTopCanvas').hide();
-                var str = $('.main-header-content h1').eq(0).text();
-                document.title = ' (◍´꒳`◍) Hi, ' + (str != '' ? str : 'BNDong') + ' - ' + RelTitle.split(' - ')[0];
+                timer = setTimeout(function () {
+                     document.title = window.cnblogsConfig.webpageTitleOnblur + ' - ' + RelTitle.split(' - ')[0];
+                }, window.cnblogsConfig.webpageTitleOnblurTimeOut);
             } else {
-                $('#myTopCanvas').fadeIn(3000);
-                document.title = RelTitle;
+                document.title = window.cnblogsConfig.webpageTitleFocus;
+                timer = setTimeout(function () {
+                    document.title = RelTitle;
+                }, window.cnblogsConfig.webpageTitleFocusTimeOut);
             }
         }
         if (typeof document.addEventListener !== "undefined" || typeof document[hidden] !== "undefined") {
@@ -116,21 +166,36 @@ function Base() {
      */
     this.homeInit = function() {
 
-        // 头部大图点击滚动到内容位置
+        // 设置主页图片
+        $('.main-header').css('background', '#222 url('+window.cnblogsConfig.homeTopImg+')  center center no-repeat').css('background-size', 'cover');
+
+
+        // 头图点击滚动到内容位置
         $('.scroll-down').click(function () { var endScroll = $('#home').offset().top + 10; tools.actScroll(endScroll, 1000);});
 
         // 设置右下角菜单
-        setRightMenuTId = window.setInterval( bndongJs.addHomeRightMenu, 1000 );
+        timeIds.setHomeRightMenuTId = window.setInterval( caihuaJs.addHomeRightMenu, 1000 );
 
-        bndongJs.setHitokoto();
-        bndongJs.scrollMonitor();
-        bndongJs.topBgAnimation();
+        caihuaJs.setHitokoto();
+        caihuaJs.scrollMonitor();
+
+        if (window.cnblogsConfig.isHomeTopAnimation)
+            require(['circleMagic'], function() {
+                $('.main-header').circleMagic(window.cnblogsConfig.homeTopAnimation);
+        });
     };
 
     /**
      * 非主页初始化
      */
     this.notHomeInit = function() {
+
+        // 设置随笔标题
+        var sbTitle = $('#cb_post_title_url').text();
+        $('.main-header-content').append('<h1 class="sb-title">'+sbTitle+'</h1>');
+        $('.inner').css('max-width', '100vw');
+
+        caihuaJs.setDomHomePosition();
 
         require(['baguetteBox', 'marvin', 'articleStatement'], function(baguetteBox) {
 
@@ -150,16 +215,16 @@ function Base() {
             }
 
             // 初始化文章目录位置
-            setCatalogTId = window.setInterval( bndongJs.initCatalog, 1000 );
+            timeIds.setCatalogTId = window.setInterval( caihuaJs.initCatalog, 1000 );
 
-            bndongJs.scrollMonitor();
+            caihuaJs.scrollMonitor();
         });
 
         // 设置右下角菜单
-        setRightMenuTId = window.setInterval( bndongJs.addNotHomeRightMenu, 1000 );
+        timeIds.setNotHomeRightMenuTId = window.setInterval( caihuaJs.addNotHomeRightMenu, 1000 );
 
-        bndongJs.setNotHomeTopImg();
-        bndongJs.setCommentStyle();
+        caihuaJs.setNotHomeTopImg();
+        caihuaJs.setCommentStyle();
     };
 
     /**
@@ -170,9 +235,9 @@ function Base() {
         if (sideToolbar.length > 0) {
             var sideToolbarTop   = $('.main-header').outerHeight();
             sideToolbar.css('top', (sideToolbarTop + 20) + 'px');
-            bndongJs.resizeMonitor();
+            caihuaJs.resizeMonitor();
             sideToolbar.fadeIn(300);
-            window.clearInterval(setCatalogTId);
+            caihuaJs.clearIntervalTimeId(timeIds.setCatalogTId);
         }
     };
 
@@ -180,6 +245,12 @@ function Base() {
      * 设置主页标语
      */
     this.setHitokoto = function() {
+
+        if (window.cnblogsConfig.homeBannerText != "") {
+            $('#hitokoto').text(window.cnblogsConfig.homeBannerText).css('display', '-webkit-box');
+            caihuaJs.setDomHomePosition();
+            return true;
+        }
 
         var topTitleList = [
             '每一个不曾起舞的日子，都是对生命的辜负。',
@@ -202,45 +273,31 @@ function Base() {
             '有的人25岁就死了，只是到75岁才埋葬'
         ];
 
-        // var settings = {
-        //     "async": true,
-        //     "crossDomain": true,
-        //     "url": "https://api.hibai.cn/api/index/index",
-        //     "method": "POST",
-        //     "headers": {
-        //         "content-type": "application/x-www-form-urlencoded",
-        //     },
-        //     "data": {
-        //         "TransCode": "030111",
-        //         "OpenId": "123456789",
-        //         "Body": ""
-        //     }
-        // };
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://api.hibai.cn/api/index/index",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded",
+            },
+            "data": {
+                "TransCode": "030111",
+                "OpenId": "123456789",
+                "Body": ""
+            }
+        };
 
-        // $.ajax(settings).done(function (response) {
-        //     if (response.ResultCode == 1) {
-        //         $('#hitokoto').text(response.Body.word).show();
-        //         $('#hitokotoAuthor').text('- '+response.Body.word_from).show();
-        //     } else {
-        var listIndex = tools.randomNum(0, topTitleList.length - 1);
-        $('#hitokoto').text(topTitleList[listIndex]).show();
-        //     }
-        //     return false;
-        // });
-    };
-
-    /**
-     * 设置主页动画
-     */
-    this.topBgAnimation = function() {
-        require(['circleMagic'], function() {
-            $('.main-header').circleMagic({
-                radius: 15,
-                density: 0.2,
-                color: 'rgba(255,255,255, .2)',
-//                    color: 'random',
-                clearOffset: 0.3
-            });
+        $.ajax(settings).done(function (response) {
+            if (response.ResultCode == 1) {
+                $('#hitokoto').text(response.Body.word).css('display', '-webkit-box');
+                $('#hitokotoAuthor').text('- '+response.Body.word_from).show();
+            } else {
+                var listIndex = tools.randomNum(0, topTitleList.length - 1);
+                $('#hitokoto').text(topTitleList[listIndex]).css('display', '-webkit-box');
+            }
+            caihuaJs.setDomHomePosition();
+            return false;
         });
     };
 
@@ -248,18 +305,55 @@ function Base() {
      * 设置非主页头图
      */
     this.setNotHomeTopImg = function() {
-        $('.main-header').css('height', '40vh');
-        $('.main-header').css('background', '#222 url(https://www.cnblogs.com/images/cnblogs_com/icaihua/1330033/o_o_wallhaven-666357.jpg)  center center no-repeat');
-        $('.main-header').css('background-size', 'cover');
-        $('.vertical').css('display', 'none');
-        $('.scroll-down').css('display', 'none');
+        $('.main-header').css('height', '40vh')
+            .css('background', '#222 url('+window.cnblogsConfig.essayTopImg+')  center center no-repeat')
+            .css('background-size', 'cover');
+        $('#homeTopTitle').hide();
+        $('.scroll-down').hide();
         $('#home').css('margin-top', '40vh');
         $('#cb_post_title_url').addClass('post-del-title');
 
-        require(['TweenMax', 'MyTween'], function() {
-            initCanvas('myTopCanvas');
+        if (window.cnblogsConfig.isEssayTopAnimation)
+            require(['TweenMax', 'MyTween'], function() {
+            initCanvas('notHomeTopCanvas');
             start();
         });
+    };
+
+    /**
+     * 初始化主体内容位置
+     */
+    this.setDomHomePosition = function () {
+        $('#home').css('margin-top', $('.main-header').outerHeight() + 'px');
+    };
+
+    /**
+     * 页面特效控制
+     */
+    this.setPageAnimationControl = function () {
+        if (window.cnblogsConfig.isHomeTopAnimation
+            || window.cnblogsConfig.isEssayTopAnimation
+            || window.cnblogsConfig.isBackgroundAnimation
+        ) {
+            var html = '<div id="pageAnimationOffOn" data="off" style="z-index:  999;position:  absolute;top: 15px;right: 20px;font-size: 14px;color: #f9f9f9;cursor: pointer;">';
+            html += '<span id="pageAnimationOffOnIcon" class="iconfont icon-shandian" style="display: inline-block;"></span>';
+            html += '<span id="pageAnimationOffOnText">关闭页面特效</span>';
+            html += '</div>';
+            $('body').prepend(html);
+            $('#pageAnimationOffOn').click(function () {
+                if ($(this).attr('data') == 'off') {
+                    $('body').find('canvas').hide();
+                    $('#pageAnimationOffOnIcon').rotate({animateTo:-360});
+                    $('#pageAnimationOffOnText').text("打开页面特效");
+                    $(this).attr('data', 'on');
+                } else {
+                    $('body').find('canvas').show();
+                    $('#pageAnimationOffOnIcon').rotate({animateTo:360});
+                    $('#pageAnimationOffOnText').text("关闭页面特效");
+                    $(this).attr('data', 'off');
+                }
+            });
+        }
     };
 
     /**
@@ -278,7 +372,7 @@ function Base() {
                         var patch = op.text();
                         var html = '<img class="comment-avatar" src="'+patch+'"/>';
                     } else {
-                        var html = '<img class="comment-avatar" src="https://files.cnblogs.com/files/bndong/no_avatar.gif"/>';
+                        var html = '<img class="comment-avatar" src="https://files.cnblogs.com/files/icaihua/no_avatar.gif"/>';
                     }
                     $(commentList[i]).before(html);
                 }
@@ -291,8 +385,7 @@ function Base() {
 
         //气泡效果
         var commentTime = setInterval(function(){if($("#comments_pager_bottom").length>0){CommentBubble();clearTimeout(commentTime);}},50);
-        function CommentBubble()
-        {
+        function CommentBubble() {
             var w1 = '<div class="list">' +
                 '<table class="out" border="0" cellspacing="0" cellpadding="0"> ' +
                 '<tr>' +
@@ -318,11 +411,16 @@ function Base() {
     };
 
     /**
+     * 播放器初始化
+     */
+    this.musicInit = function() {};
+
+    /**
      * 结束Loading页面
      */
     this.endLoading = function() {
         $('body').css('overflow', 'auto');
-        demo.spinner.setComplete();
+        pageLoading.spinner.setComplete();
         $('#loading').fadeOut(300);
     };
 
@@ -395,6 +493,7 @@ function Base() {
      */
     this.resizeMonitor = function() {
         var bodyWidth = parseFloat(document.body.clientWidth);
+        caihuaJs.setDomHomePosition();
 
         // 设置目录插件左右位置
         if ($('#sideToolbar').length > 0) {
@@ -416,52 +515,52 @@ function Base() {
     /**
      * 右下角菜单事件处理
      */
-    this.rightMenuMous = function(l, s) {
-        $(l).on({
+    this.rightMenuMous = function(parentObject, subObject) {
+        $(parentObject).on({
             mouseover : function(){
-                if (s == '.rightBuryitSpan') {
+                if (subObject == '.rightBuryitSpan') {
                     // 鼠标移入，更新踩值
-                    var c = $('#bury_count').text();
-                    if ($(s).text() != c) {$(l).attr('clickflg', 'false');$(s).text(c);}
+                    var str = $('#bury_count').text();
+                    if ($(subObject).text() != str) {$(parentObject).attr('clickflg', 'false');$(subObject).text(str);}
                 }
 
-                if (s == '.rightDiggitSpan') {
+                if (subObject == '.rightDiggitSpan') {
                     // 鼠标移入，更新顶值
-                    var c = $('#digg_count').text();
-                    if ($(s).text() != c) {$(l).attr('clickflg', 'false');$(s).text(c);}
+                    var str = $('#digg_count').text();
+                    if ($(subObject).text() != str) {$(parentObject).attr('clickflg', 'false');$(subObject).text(str);}
                 }
-                $(s).show();
+                $(subObject).show();
             },
             mouseout : function(){
-                $(s).hide();
+                $(subObject).hide();
             },
             click: function () {
-                if (s == '.rightBuryitSpan' || s == '.rightDiggitSpan') {
+                if (subObject == '.rightBuryitSpan' || subObject == '.rightDiggitSpan') {
                     // 点击顶踩，数值变化
                     if ($(this).attr('clickflg') == 'false') {
-                        var rightSpan = $(s);
+                        var rightSpan = $(subObject);
                         var i = parseInt(rightSpan.text()) + 1;
                         rightSpan.text(i);
                         $(this).attr('clickflg', 'true');
                     }
                 }
 
-                if (s == '.attentionSpan') {
+                if (subObject == '.attentionSpan') {
                     // 点击关注
-                    if ($('#p_b_follow').text() == '' || $(l + ' a').text().indexOf('成功') > 0) {
-                        $(s).text('已关注');
+                    if ($('#p_b_follow').text() == '' || $(parentObject + ' a').text().indexOf('成功') > 0) {
+                        $(subObject).text('已关注');
                     } else {
-                        $(s).text('关注');
+                        $(subObject).text('关注');
                     }
                 }
 
-                if (s == '.toUpDownSpan') {
+                if (subObject == '.toUpDownSpan') {
                     // 点击滚动
                     var ac = $(this).attr('data');
                     if (ac == 'down') {
                         var docHeight    = $(document).height();
                         var windowHeight = $(window).height();
-                        tools.actScroll(docHeight-windowHeight, 2000)
+                        tools.actScroll(docHeight - windowHeight, 2000)
                     } else {
                         tools.actScroll(0, 2000)
                     }
@@ -471,121 +570,156 @@ function Base() {
     };
 
     /**
-     * 添加网站监控
+     * 添加页脚
      */
-    this.addWebPv = function() {
+    this.addFooter = function() {
         var pvHtml =  '<i class="iconfont icon-odps-data cnzz" style="position: relative;top: 2px;left: 3px;cursor: pointer;"></i>';
         // 请去 AmazingCounters.com 配置自己的，谢谢！！
         pvHtml += '<span id="amazingStatSpan"><span id="amazingStat" style=""><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3226342&c=9679339" s="AmazingCounters.com" style="opacity: 0.5;margin-left: 7px;cursor: pointer;max-width: 72%;vertical-align: middle;height: 15px;margin-top: -2px;"></span></span>';
+        pvHtml += '<div>【'+window.cnblogsConfig.bottomText.left+'<span id="footerTextIcon">❤️</span>'+window.cnblogsConfig.bottomText.right+'】</div>';
         pvHtml += '<div>【❤️ 认清了生活的真相后还依然热爱它 ❤️】</div>';
         pvHtml += "<div><span id='blogRunTimeSpan'></span><span class='my-face'>ღゝ◡╹)ノ♡</span></div>";
         pvHtml += '<div id="cnzzInfo"></div>';
-        $('#footer').append(pvHtml);
-        $('#footer').prepend('<div class="footer-image"></div>');
+        $('#footer').append(pvHtml).prepend('<div class="footer-image"></div>');
 
         if (window.location.href.search("www.cnblogs.com/icaihua") == -1 ) {
-            bndongJs.setTheme();
+            setTheme();
         }
 
-        window.setInterval( bndongJs.setRunTime, 500 );
-        setCnzzTId    = window.setInterval( bndongJs.setCnzz, 1000 );
-        setAmazingTId = window.setInterval( bndongJs.setAmazing, 1000 );
-    };
-    this.setRunTime = function () {
-        var str = $('#blogStartTimeInput').val();
-        str = str ? str : '2016-11-17';
-        var runDate = tools.getRunDate(str);
-        $('#blogRunTimeSpan').text('This blog has running : '+runDate.daysold+' d '+runDate.hrsold+' h '+runDate.minsold+' m '+runDate.seconds+' s');
-    };
-    this.setCnzz = function() {
-        // 请去 CNZZ 配置自己的，谢谢！！
-        var url = window.location.href;
-        var cnzzStat = $('#cnzz_stat_icon_1274589189 a');
-        if (cnzzStat.length > 0) {
-            var cnzzInfo = [];
-            var cnzzArr  = $(cnzzStat[1]).text().split('|');
-            $.each(cnzzArr, function (i) {
-                var str = $.trim(cnzzArr[i]);
-                if (str != '') {
-                    str = str.replace('今日','Today').replace('昨日','Yesterday').replace('[',':').replace(']','');
-                    cnzzInfo.push(str)
-                }
-            });
-            cnzzInfo.push($(cnzzStat[2]).text().replace('当前在线','Online').replace('[',':').replace(']',''));
-            $('#cnzzInfo').text(cnzzInfo.join(' | '));
-            window.clearInterval(setCnzzTId);
+        window.setInterval( setRunTime, 500 );
+        setBlogroll();
+        timeIds.setCnzzTId    = window.setInterval( setCnzz, 1000 );
+        timeIds.setAmazingTId = window.setInterval( setAmazing, 1000 );
+
+        function setRunTime() {
+            var str = window.cnblogsConfig.blogStartDate;
+            str = str ? str : '2016-11-17';
+            var runDate = tools.getRunDate(str);
+            $('#blogRunTimeSpan').text('This blog has running : '+runDate.daysold+' d '+runDate.hrsold+' h '+runDate.minsold+' m '+runDate.seconds+' s');
         }
-    };
-    this.setTheme = function () {
-        $('#footer').prepend('<div class="footer-image"></div>');
-        setInterval(function(){
-            var footer = $('#footer');
-            var themeHtml = '<p id="ThemeAuthors" style="color: #444;z-index: 999;">[ Theme Authors：<a href="https://www.cnblogs.com/icaihua/" target="_blank" style="color:#444;">菜花君°</a> ]</p></div>';
-            $('#ThemeAuthors').show();
-            if ($('#ThemeAuthors').length == 0) {
-                $('#footer').append(themeHtml);
+        function setBlogroll() {
+            if (window.cnblogsConfig.bottomBlogroll.length > 0) {
+                var blogrollArr  = window.cnblogsConfig.bottomBlogroll;
+                var blogrollHtml = '友情链接：';
+                for(var i = 0; i < blogrollArr.length; i++) {
+                    blogrollHtml += '<a href="'+(blogrollArr[i][1])+'" target="_blank">'+(blogrollArr[i][0])+'</a>';
+                    if (i < blogrollArr.length-1) blogrollHtml += '<span style="margin: 0 3px;">/</span>';
+                }
+                $('#blogrollInfo').html(blogrollHtml);
             }
-        },3000);
+        }
+        function setCnzz() {
+            // 请去 CNZZ 配置自己的，谢谢！！
+            var cnzzStat = $('.id_cnzz_stat_icon a');
+            if (cnzzStat.length > 0) {
+                var cnzzInfo = [];
+                var cnzzArr  = $(cnzzStat[1]).text().split('|');
+                $.each(cnzzArr, function (i) {
+                    var str = $.trim(cnzzArr[i]);
+                    if (str != '') {
+                        str = str.replace('今日','Today').replace('昨日','Yesterday').replace('[',':').replace(']','');
+                        cnzzInfo.push(str)
+                    }
+                });
+                cnzzInfo.push($(cnzzStat[2]).text().replace('当前在线','Online').replace('[',':').replace(']',''));
+                $('#cnzzInfo').text(cnzzInfo.join(' | '));
+                caihuaJs.clearIntervalTimeId(timeIds.setCnzzTId);
+            }
+        }
+        function setAmazing() {
+            // 请去 AmazingCounters.com 配置自己的，谢谢！！
+            if ($('#amazingStat').length > 0) {
+                $('#amazingStat').appendTo('#amazingStatSpan').show();
+                caihuaJs.clearIntervalTimeId(timeIds.setAmazingTId);
+            }
+        }
+        function setTheme() {
+            $('#footer').prepend('<div class="footer-image"></div>');
+            setInterval(function(){
+                var footer = $('#footer');
+                var themeHtml = '<p id="ThemeAuthors" style="color: #444;z-index: 999;">- Theme Authors：<a href="https://www.cnblogs.com/icaihua/" target="_blank" style="color:#444;">菜花君°</a> -</p></div>';
+                if ($('#ThemeAuthors').length == 0) {
+                    $('#footer').append(themeHtml);
+                } else {
+                    $('#ThemeAuthors').show().css('visibility', 'visible');
+                }
+            },3000);
+        }
     };
 
     /**
      * 设置菜单数据
      */
     this.setMenuData = function() {
-        var sbClassifyHtml = $('#sidebar_postcategory').html(); // 随笔分类
-        var introduceHtml  = $('#profile_block').html();        // 个人信息
-        var sbRecordHtml   = $('#sidebar_postarchive').html();  // 随笔档案
-        var sbTopview      = $('#TopViewPostsBlock ul li');     // 阅读排行
-        var topDiggPosts   = $('#TopDiggPostsBlock ul li');     // 推荐排行
-
-        // 添加随笔分类
-        if ((typeof sbClassifyHtml == 'string') && $('#sb-classify').html() == '') {
-            $('#sb-classify').html(tools.htmlFiltrationScript(sbClassifyHtml));
-        }
+        var introduceHtml    = $('#profile_block').html(),        // 个人信息
+            sidebar          = $('#sidebar_recentposts ul li'),   // 最新随笔
+            toptags          = $('#sidebar_toptags ul li'),       // 我的标签
+            sbClassify       = $('#sidebar_postcategory ul li'),  // 随笔分类
+            sbRecord         = $('#sidebar_postarchive ul li'),   // 随笔档案
+            sbTopview        = $('#TopViewPostsBlock ul li'),     // 阅读排行
+            topDiggPosts     = $('#TopDiggPostsBlock ul li'),     // 推荐排行
+            menuIntroduce    = $('#introduce'),
+            menuSidebar      = $('#sb-sidebarRecentposts'),
+            menuToptags      = $('#sb-toptags'),
+            menuClassify     = $('#sb-classify'),
+            menuRecord       = $('#sb-record'),
+            menuTopview      = $('#sb-topview'),
+            menuTopDiggPosts = $('#sb-topDiggPosts');
 
         // 添加个人信息
-        if ((typeof introduceHtml == 'string') && $('#introduce').html() == '') {
-            $('#introduce').html(tools.htmlFiltrationScript(introduceHtml));
-        }
+        if ((typeof introduceHtml == 'string') && menuIntroduce.html() == '')
+            menuIntroduce.html(tools.htmlFiltrationScript(introduceHtml));
+
+        // 添加最新随笔
+        if (sidebar.length > 0 && menuSidebar.html() == '')
+            menuSidebar.html(getMenuData(sidebar, 'icon-time_fill')).prev('.m-list-title').show();
+
+        // 添加我的标签
+        if (toptags.length > 0 && menuToptags.html() == '')
+            menuToptags.html(getMenuData(toptags, 'icon-label_fill')).prev('.m-list-title').show();
+
+        // 添加随笔分类
+        if (sbClassify.length > 0 && menuClassify.html() == '')
+            menuClassify.html(getMenuData(sbClassify, 'icon-marketing_fill')).prev('.m-list-title').show();
 
         // 添加随笔档案
-        if ((typeof sbRecordHtml == 'string') && $('#sb-record').html() == '') {
-            $('#sb-record').html(tools.htmlFiltrationScript(sbRecordHtml));
-        }
+        if (sbRecord.length > 0 && menuRecord.html() == '')
+            menuRecord.html(getMenuData(sbRecord, 'icon-task_fill')).prev('.m-list-title').show();
 
         // 添加阅读排行
-        if (sbTopview.length > 0 && $('#sb-topview').html() == '') {
-            var sbTopviewHtml = '<div><ul>';
-            sbTopview.each(function (i) {
-                var o = $($(sbTopview[i]).html());
-                var textArr = o.text().split('.');
-                textArr.splice(0,1);
-                var text = $.trim(textArr.join('.'));
-                o.text(text);
-                sbTopviewHtml += '<li>' + o.prop("outerHTML") + '</li>';
-            });
-            sbTopviewHtml += '</ul></div>';
-            $('#sb-topview').html(sbTopviewHtml);
-        }
+        if (sbTopview.length > 0 && menuTopview.html() == '')
+            menuTopview.html(getMenuData(sbTopview, 'icon-browse_fill')).prev('.m-list-title').show();
 
         // 添加推荐排行
-        if (topDiggPosts.length > 0 && $('#sb-topDiggPosts').html() == '') {
-            var topDiggPostsHtml = '<div><ul>';
-            topDiggPosts.each(function (i) {
-                var o = $($(topDiggPosts[i]).html());
-                var textArr = o.text().split('.');
-                textArr.splice(0,1);
-                var text = $.trim(textArr.join('.'));
-                o.text(text);
-                topDiggPostsHtml += '<li>' + o.prop("outerHTML") + '</li>';
-            });
-            topDiggPostsHtml += '</ul></div>';
-            $('#sb-topDiggPosts').html(topDiggPostsHtml);
-        }
+        if (topDiggPosts.length > 0 && menuTopDiggPosts.html() == '')
+            menuTopDiggPosts.html(getMenuData(topDiggPosts, 'icon-like_fill')).prev('.m-list-title').show();
 
         // 清除定时器
-        if ((typeof sbClassifyHtml == 'string') && (typeof introduceHtml == 'string') && (typeof sbRecordHtml == 'string') && sbTopview.length > 0 && topDiggPosts.length > 0) {
-            window.clearInterval(setMenuDataTId);
+        if (
+            sidebar.length > 0
+             && toptags.length > 0
+             && sbClassify.length > 0
+             && sbRecord.length > 0
+             && sbTopview.length > 0
+             && topDiggPosts.length > 0
+        ) {
+            caihuaJs.clearIntervalTimeId(timeIds.setMenuDataTId);
+        }
+
+        function getMenuData(obj, icon) {
+            var html = '<div><ul>';
+            var ret  = /^[1-9]+[0-9]*$/;
+            obj.each(function (i) {
+                var o = $($(obj[i]).html());
+                var textArr = o.text().split('.');
+                if (ret.test(textArr[0])) textArr.splice(0,1);
+                var text = $.trim(textArr.join('.'));
+                var iconHtml = '<span class="iconfont '+icon+'" style="color: #888;font-size: 14px;margin-right: 5px;"></span>';
+                o.html(iconHtml + text);
+                html += '<li>' + o.prop("outerHTML") + '</li>';
+            });
+            html += '</ul></div>';
+            return html;
         }
     };
 
@@ -599,7 +733,7 @@ function Base() {
             // 添加上下滚动
             var upDownHtml = '<div id="toUpDown" data="up"><span class="rightMenuSpan toUpDownSpan">返回顶部</span><div id="toUpDownI"><i class="iconfont icon-zhiding"></i></div></div>';
             rightMenu.prepend(upDownHtml);
-            bndongJs.rightMenuMous('#toUpDown', '.toUpDownSpan');
+            caihuaJs.rightMenuMous('#toUpDown', '.toUpDownSpan');
 
             // 添加关注
             var clickStr = '';
@@ -614,9 +748,9 @@ function Base() {
             }
 
             rightMenu.prepend(attHtml);
-            bndongJs.rightMenuMous('#attention', '.attentionSpan');
-            bndongJs.scrollMonitor(); // 触发一次滚动处理，防止未有对象，初始化失败
-            window.clearInterval(setRightMenuTId);
+            caihuaJs.rightMenuMous('#attention', '.attentionSpan');
+            caihuaJs.scrollMonitor(); // 触发一次滚动处理，防止未有对象，初始化失败
+            caihuaJs.clearIntervalTimeId(timeIds.setHomeRightMenuTId);
         }
     };
 
@@ -627,19 +761,18 @@ function Base() {
         var rightMenu = $('#rightMenu');
         if (rightMenu.length > 0 && $('#div_digg').length > 0) {
 
-            bndongJs.addHomeRightMenu();
+            if ($('#toUpDown').length == 0 && $('#attention').length == 0) caihuaJs.addHomeRightMenu();
 
             // 添加踩
             var rightBuryitHtml = '<div id="rightBuryit" clickflg="false" onclick="' + ($(".buryit").attr("onclick")) + '"><span class="rightMenuSpan rightBuryitSpan">' + $('#bury_count').text() + '</span><i class="iconfont icon-buzan"></i></div>';
             rightMenu.prepend(rightBuryitHtml);
-            bndongJs.rightMenuMous('#rightBuryit', '.rightBuryitSpan');
+            caihuaJs.rightMenuMous('#rightBuryit', '.rightBuryitSpan');
 
             // 添加顶
             var rightDiggitHtml = '<div id="rightDiggit" clickflg="false" onclick="' + ($(".diggit").attr("onclick")) + '"><span class="rightMenuSpan rightDiggitSpan">' + $('#digg_count').text() + '</span><i class="iconfont icon-zan1"></i></div>';
             rightMenu.prepend(rightDiggitHtml);
-            bndongJs.rightMenuMous('#rightDiggit', '.rightDiggitSpan');
-
-            window.clearInterval(setRightMenuTId);
+            caihuaJs.rightMenuMous('#rightDiggit', '.rightDiggitSpan');
+            caihuaJs.clearIntervalTimeId(timeIds.setNotHomeRightMenuTId);
         }
     }
 }
