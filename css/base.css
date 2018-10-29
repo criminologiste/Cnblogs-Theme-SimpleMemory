@@ -2964,7 +2964,7 @@ button {
 }
 
 .postBody blockquote {
-    background: url('images/comment.gif')) no-repeat 25px 0px;
+    background: url('images/comment.gif') no-repeat 25px 0px;
     min-height: 35px;
     _height: 35px;
     line-height: 1.6em;
@@ -4093,7 +4093,7 @@ a#green_channel_wechat {
         line-height: 1.3em;
     }
 
-    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer, #homeTopCanvas, #notHomeTopCanvas {
+    #sideToolbar, #music-box, .scroll-down, #evanyou, #aplayer, #notHomeTopCanvas {
         display: none !important;
     }
 }
@@ -4119,7 +4119,7 @@ a#green_channel_wechat {
         display: none;
     }
 
-    #homeTopCanvas, #notHomeTopCanvas, #bgCanvas {
+    #notHomeTopCanvas, #bgCanvas {
         display: none !important;
     }
 }
@@ -4183,7 +4183,7 @@ a#green_channel_wechat {
     }
 
     #pageAnimationOffOn, #sideToolbar, #music-box, .scroll-down, #evanyou, #canvas, #aplayer,
-    #homeTopCanvas, #notHomeTopCanvas, #bgCanvas
+    #notHomeTopCanvas, #bgCanvas
     {
         display: none !important;
     }
