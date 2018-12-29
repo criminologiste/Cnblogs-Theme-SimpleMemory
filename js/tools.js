@@ -42,9 +42,9 @@ function myTools() {
                 });
                 break;
             case 'banner':
-                console.log('\n' + ' %c 菜花君 CNBlogs %c https://www.cnblogs.com/icaihua ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
-                console.log('\n' + ' %c 菜花君 GitHub %c https://github.com/Zhou-Hepeng ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
-                console.log('\n' + ' %c 菜花君 Email %c 512663864@qq.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+                console.log('\n' + ' %c 心跳 CNBlogs %c https://www.cnblogs.com/xintiao- ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+                console.log('\n' + ' %c 心跳 GitHub %c https://github.com/criminologiste' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+                console.log('\n' + ' %c 心跳 Email %c 1357110668@qq.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
                 break;
 
             default:
